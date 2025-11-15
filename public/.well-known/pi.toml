@@ -1,1 +1,12 @@
+VERSION="1.0.0"
 
+[[PRINCIPALS]]
+name="Chợ Tốt Pi"
+email="chototpi@gmail.com"
+
+[[CURRENCIES]]
+code="GMOP"
+issuer="GDUIGY53ZJYDLFIJC43CGKABUJWJDAOC5JQMZWW2I7AVUDL5X5ZKXFM7"
+name="Chợ Tốt Pi"
+desc="This is a test token created by the Chợ Tốt Pi on Pi Testnet."
+image="https://testnet.chototpi.site/muasampi.png"
