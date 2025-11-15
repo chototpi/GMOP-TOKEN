@@ -1,8 +1,10 @@
 const StellarSDK = require("@stellar/stellar-sdk");
 const { server, NETWORK, issuer } = require("./util");
 
-(async () => {
+module.exports = async () => {
   try {
+    console.log("Running set-home-domain job...");
+
     const issuerAcc = await server.loadAccount(issuer.publicKey());
 
     const latest = await server.ledgers().order("desc").limit(1).call();
@@ -13,17 +15,20 @@ const { server, NETWORK, issuer } = require("./util");
       networkPassphrase: NETWORK,
       timebounds: await server.fetchTimebounds(90),
     })
-      .addOperation(StellarSDK.Operation.setOptions({
-        homeDomain: process.env.HOME_DOMAIN
-      }))
+      .addOperation(
+        StellarSDK.Operation.setOptions({
+          homeDomain: process.env.HOME_DOMAIN
+        })
+      )
       .build();
 
     tx.sign(issuer);
     await server.submitTransaction(tx);
 
-    console.log("✅ Home Domain set:", process.env.HOME_DOMAIN);
-
+    console.log("Home domain set successfully.");
+    return true;
   } catch (err) {
-    console.error("❌ ERROR:", err.response?.data || err);
+    console.error(err);
+    throw err;
   }
-})();
+};
