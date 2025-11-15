@@ -12,15 +12,6 @@ app.get("/", (req, res) => {
   res.send("GMOP Token Server is running on Render.");
 });
 
-/* Simple API to check status */
-app.get("/api/status", (req, res) => {
-  res.json({
-    status: "ok",
-    issuer: process.env.ISSUER_SECRET ? "loaded" : "missing",
-    distributor: process.env.DISTRIBUTOR_SECRET ? "loaded" : "missing"
-  });
-});
-
 // ====== API STATUS ======
 app.get("/api/status", (req, res) => {
   res.json({
