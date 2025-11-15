@@ -21,6 +21,39 @@ app.get("/api/status", (req, res) => {
   });
 });
 
+// ====== API STATUS ======
+app.get("/api/status", (req, res) => {
+  res.json({
+    status: "ok",
+    issuer: process.env.ISSUER_SECRET ? "loaded" : "missing",
+    distributor: process.env.DISTRIBUTOR_SECRET ? "loaded" : "missing"
+  });
+});
+
+// ====== API: RUN CREATE TOKEN SCRIPT ======
+app.get("/run/create-gmop", async (req, res) => {
+  try {
+    const create = require("./gmop/create-token.js");
+    create().then(() => {
+      res.send("GMOP token created.");
+    });
+  } catch (err) {
+    res.status(500).send(err.toString());
+  }
+});
+
+// ====== API: RUN SET HOME DOMAIN SCRIPT ======
+app.get("/run/set-home", async (req, res) => {
+  try {
+    const setHome = require("./gmop/domain.js");
+    setHome().then(() => {
+      res.send("Home domain set.");
+    });
+  } catch (err) {
+    res.status(500).send(err.toString());
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
