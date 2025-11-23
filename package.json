@@ -1,7 +1,7 @@
 {
-  "name": "GMOP-TOKEN",
+  "name": "GM-TOKEN",
   "version": "1.0.0",
-  "description": "GMOP Token creator for Pi Testnet using Node.js + Render",
+  "description": "GM Token creator for Pi Testnet using Node.js + Render",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
