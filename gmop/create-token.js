@@ -1,9 +1,9 @@
 const StellarSDK = require("@stellar/stellar-sdk");
-const { server, NETWORK, issuer, distributor, GMOP } = require("./util");
+const { server, NETWORK, issuer, distributor, GM } = require("./util");
 
 module.exports = async function () {
   try {
-    console.log("🔹 Running create GMOP job...");
+    console.log("🔹 Running create GM job...");
 
     const distributorAcc = await server.loadAccount(distributor.publicKey());
     const issuerAcc = await server.loadAccount(issuer.publicKey());
@@ -20,7 +20,7 @@ module.exports = async function () {
     })
       .addOperation(
         StellarSDK.Operation.changeTrust({
-          asset: GMOP,
+          asset: GM,
           limit: undefined
         })
       )
@@ -31,7 +31,7 @@ module.exports = async function () {
     console.log("✅ Trustline created.");
 
     // STEP 2 — MINT TOKEN
-    console.log("🔹 Minting GMOP tokens...");
+    console.log("🔹 Minting GM tokens...");
     const mintTx = new StellarSDK.TransactionBuilder(issuerAcc, {
       fee: baseFee.toString(),
       networkPassphrase: NETWORK,
@@ -40,8 +40,8 @@ module.exports = async function () {
       .addOperation(
         StellarSDK.Operation.payment({
           destination: distributor.publicKey(),
-          asset: GMOP,
-          amount: process.env.GMOP_MINT_AMOUNT || "1000000"
+          asset: GM,
+          amount: process.env.GM_MINT_AMOUNT || "1000000"
         })
       )
       .build();
@@ -49,7 +49,7 @@ module.exports = async function () {
     mintTx.sign(issuer);
     await server.submitTransaction(mintTx);
 
-    console.log("✅ GMOP minted successfully.");
+    console.log("✅ GM minted successfully.");
 
     return true;
   } catch (err) {
