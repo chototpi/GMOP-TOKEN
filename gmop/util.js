@@ -9,5 +9,5 @@ module.exports = {
   NETWORK,
   issuer: StellarSDK.Keypair.fromSecret(process.env.ISSUER_SECRET),
   distributor: StellarSDK.Keypair.fromSecret(process.env.DISTRIBUTOR_SECRET),
-  GMOP: new StellarSDK.Asset("GMOP", StellarSDK.Keypair.fromSecret(process.env.ISSUER_SECRET).publicKey())
+  GM: new StellarSDK.Asset("GM", StellarSDK.Keypair.fromSecret(process.env.ISSUER_SECRET).publicKey())
 };
