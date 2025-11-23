@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.send("GMOP Token Server is running on Render.");
+  res.send("GM Token Server is running on Render.");
 });
 
 // ====== API STATUS ======
@@ -26,7 +26,7 @@ app.get("/run/create-gmop", async (req, res) => {
   try {
     const create = require("./gmop/create-token.js");
     create().then(() => {
-      res.send("GMOP token created.");
+      res.send("GM token created.");
     });
   } catch (err) {
     res.status(500).send(err.toString());
