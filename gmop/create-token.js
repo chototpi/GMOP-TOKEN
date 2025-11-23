@@ -41,7 +41,7 @@ module.exports = async function () {
         StellarSDK.Operation.payment({
           destination: distributor.publicKey(),
           asset: GM,
-          amount: process.env.GM_MINT_AMOUNT || "1000000"
+          amount: process.env.GM_MINT_AMOUNT || "99000000"
         })
       )
       .build();
